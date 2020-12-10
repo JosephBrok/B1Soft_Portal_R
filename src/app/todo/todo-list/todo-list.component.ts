@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { TodoFormComponent } from '../todo-form/todo-form.component';
 
 @Component({
   selector: 'app-todo-list',
@@ -6,10 +8,22 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./todo-list.component.css']
 })
 export class TodoListComponent implements OnInit {
+  
 
-  constructor() { }
+  constructor(private modalservice:NgbModal) { }
 
   ngOnInit(): void {
+  }
+  clickAddTodo(){
+    const modal = this.modalservice.open(TodoFormComponent);
+    modal.result.then(
+      this.handleModalTodoFormClose.bind(this),
+      this.handleModalTodoFormClose.bind(this),
+    )
+  }
+  handleModalTodoFormClose(){
+    alert('se a cerrado el modal');
+
   }
 
 }
